@@ -1,0 +1,186 @@
+users
+
+email : string required
+password : string (hashed) required
+firstName : string required
+last name : string required
+dob : string required
+coverPhoto : mediaId
+profilePicture : mediaId
+bio : string
+friends : [userId]
+friendRequests : [userId]
+notifications : [{text : string, seen : boolean}] //postId/eventId/chatId or more probably will be added to object
+hidden : boolean default false
+groupInvitations : [{chatId,userId}]
+events : [eventId]
+connections : [userId]
+connectionRequests : [userId]
+eventInvitations : [{eventId, userId}]
+promosUsed : [promo : string]
+createdAt : Date required
+___________________
+admins
+
+username : string required
+password : string required
+module : string enum(port,ecom,some,cms,strm,comm,cal) required
+createdAt : date required
+___________________
+portfolios
+
+title : string required
+about : string required
+educations : [{degree : string, major : string, score : string, start : Date, end : Date, bullets : [bullet : string]}] required
+experiences : [{title : string, company : string, start : Date, end : Date, bullets : [bullet : string]}] required
+certfiications : [{title : string, issuer : string, date : Date, bullets : [bullet : string], link : string}] required
+projects : [{title : string, bullets : [bullet : string], contributors : [{name: string, linkedIn: string}], video : mediaId, link : string}] required
+skills : [{skill : string, level : string}] required
+others : [{title : string, desc : string}] required
+github : string required
+gmail : string required
+profilePicture : mediaId required
+createdAt : Date required
+___________________
+categories
+
+category : string required
+parent : categoryId
+module : string enum(port,ecom,some,cms,strm,comm,cal) required
+createdAt : Date required
+___________________
+products
+
+title : string required
+description : string required
+media : [mediaId] required
+sizechart : mediaId required
+stock : [{color : string, [{size : string, quantity : number}]}] required
+categories : [categoryId]
+createdAt : Date required
+___________________
+media
+
+type : string enum(video,image,pdf) required
+extension : string required // this field could be deleted if default extensions are mp4 jpg and pdf
+createdAt : Date required
+___________________
+orders
+
+userId  required
+address : {location : string, country : string, city : string, area : string, street : string, building : string, floor : number, appartmenr : number} required
+total : number required
+cod : boolean required
+status : string enum(Accepted,Shipping,Delivered) required
+date : Date required
+details : [{product : productId, color : string, size : string, quantity : number}] required
+createdAt : Date required
+___________________
+posts
+
+userId required
+header : string //this will determine wether it is a cms or social post
+description : string required
+media : [mediaId]
+likes : [userId]
+comments : [{userId, comment : string}]
+shares : [{userId, caption : string, likes : [userId], comments : [{userId, comment : string}]}]
+createdAt : Date required
+___________________
+chats
+
+firstParty : userId required
+secondParty : [userId] required
+messages : [{postId, text : string, media : [mediaId], date : Date, sender : userId, seen : [userId]}] required//postId is not required
+createdAt : Date required
+___________________
+subscriptions
+
+content-managerId required
+userId required
+ends : Date required
+total : number required
+createdAt : Date required
+___________________
+shows
+
+title : string required
+description : string required
+people : [{peopleId, role : string}]
+movies : [mediaId] // array for sequels 
+series : [{season : string, description : string, episodes : [{episode : string, description : string, mediaId}]}] //episode and season are strings
+poster : mediaId required
+categories : [categoryId]
+createdAt : Date required
+___________________
+people
+
+name : string required
+description : string
+profilePicture : mediaId required
+createdAt : Date required
+___________________
+events
+
+title : string required
+userId required
+invitees : [userId]
+start : Date required
+end : Date required
+link : string
+categories : [categoryId]
+recurring : {n : number, value : string enum(years,months,weeks)}
+createdAt : Date required
+___________________
+sellers
+
+email : string required
+password : string (hashed) required
+name : string required
+about : string
+logo : mediaId
+contacts : [number : string]
+createdAt : Date required
+___________________
+shippers
+
+email : string required
+password : string required
+sellerId required
+createdAt : Date required
+___________________
+content-managers
+
+email : string required
+password : string required
+//the following 4 fields determine module
+title : string
+description : string
+trailer : mediaId
+subscription plans : [{price : number, duration : number, title : string}]
+createdAt : Date required
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
